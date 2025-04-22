@@ -10,7 +10,7 @@ import MeetingModal from "@/components/MeetingModal";
 import LoaderUI from "@/components/LoaderUI";
 import { Loader2Icon } from "lucide-react";
 import MeetingCard from "@/components/MeetingCard";
-import { QUICK_ACTIONS } from "@/ constants";
+import { QUICK_ACTIONS, QUICK_ACTIONS1 } from "@/ constants";
 
 export default function Home() {
   const router = useRouter();
@@ -72,6 +72,21 @@ export default function Home() {
         </>
       ) : (
         <>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {QUICK_ACTIONS1.map((action) => (
+              <ActionCard
+                key={action.title}
+                action={action}
+                onClick={() => handleQuickAction(action.title)}
+              />
+            ))}
+             <MeetingModal
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+            title={modalType === "join" ? "Join Meeting" : "Start Meeting"}
+            isJoinMeeting={modalType === "join"}
+          />
+          </div>
           <div>
             <h1 className="text-3xl font-bold">Your Interviews</h1>
             <p className="text-muted-foreground mt-1">View and join your scheduled interviews</p>
@@ -87,6 +102,7 @@ export default function Home() {
                 {interviews.map((interview) => (
                   <MeetingCard key={interview._id} interview={interview} />
                 ))}
+                
               </div>
             ) : (
               <div className="text-center py-12 text-muted-foreground">

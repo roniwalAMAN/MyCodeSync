@@ -38,4 +38,5 @@ function MeetingPage() {
     </StreamCall>
   );
 }
+
 export default MeetingPage;
